@@ -27,11 +27,8 @@ last_updated: 2025-11-17
 >
 > `#毒雞湯`
 
-# My Music Page
+### November 20, 2025
 
-Here's a cool song you can listen to:
-
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=S2mZDjy8kgk&list=RDS2mZDjy8kgk&t=1s" 
-    title="YouTube video player" frameborder="0" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-    allowfullscreen></iframe>
+> @6. Work smarter, not harder.
+>
+> `#毒雞湯`
