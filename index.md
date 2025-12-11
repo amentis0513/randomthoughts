@@ -38,3 +38,9 @@ last_updated: 2025-11-17
 > @7. 一夢一世界，就算在夢中也不能夠真正的脫離世界得到解脫。
 >
 > `#cruise`
+
+### December 11, 2025
+
+> @8. Bloodline is the source of power, there's no good or bad bloodline.
+>
+> `#cafe`
