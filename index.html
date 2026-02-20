@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Daily Journal</title>
+
+    <!-- Google Identity Services (current / non-deprecated way in 2025+) -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+      #login-area {
+        text-align: center;
+        margin: 4rem 0;
+      }
+      #content {
+        display: none;
+      }
+      .entry {
+        border-bottom: 1px solid #eee;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+      }
+      h2 {
+        color: #333;
+      }
+      .label {
+        font-weight: bold;
+        color: #555;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="login-area">
+      <h1>Private Daily Journal</h1>
+      <p>Please sign in with Google</p>
+
+      <!-- Google Sign In button will appear here -->
+      <div
+        id="g_id_onload"
+        data-client_id="877701540997-riujivftahvtaq269pk3v5ufipv913aj.apps.googleusercontent.com"
+        data-auto_prompt="false"
+      ></div>
+      <div
+        class="g_id_signin"
+        data-type="standard"
+        data-size="large"
+        data-theme="outline"
+        data-text="sign_in_with"
+        data-shape="rectangular"
+        data-logo_alignment="left"
+      ></div>
+    </div>
+
+    <div id="content">
+      <h1>My Journal</h1>
+      <button onclick="signOut()">Sign Out</button>
+
+      <!-- ============================================= -->
+      <!-- ===   You only edit / add below this line  === -->
+      <!-- ============================================= -->
+
+      <div class="entry">
+        <h2>2026-02-20</h2>
+
+        <p><span class="label">Target Call:</span> 80 calls</p>
+        <p><span class="label">Result Call:</span> 72 calls (achieved 90%)</p>
+
+        <p>
+          <span class="label">Experience:</span> Had a very good conversation
+          with client X, felt more confident handling objections today.
+        </p>
+
+        <p>
+          <span class="label">Learning:</span> Using open-ended questions early
+          increases engagement by ~30% (from today's reading).
+        </p>
+      </div>
+
+      <!-- Add new entries above this line, just copy-paste the <div class="entry"> block -->
+
+      <!-- Example of another day -->
+      <!--
+    <div class="entry">
+      <h2>2026-02-19</h2>
+      ...
+    </div>
+    -->
+
+      <!-- ============================================= -->
+      <!-- ===   Stop editing here                     === -->
+      <!-- ============================================= -->
+    </div>
+
+    <script>
+      // Global so we can call from button
+      function signOut() {
+        google.accounts.id.disableAutoSelect();
+        alert("Signed out. Refresh page to sign in again.");
+        document.getElementById("content").style.display = "none";
+        document.getElementById("login-area").style.display = "block";
+      }
+
+      function handleCredentialResponse(response) {
+        // Decode the JWT (id token) to get user info
+        const data = JSON.parse(atob(response.credential.split(".")[1]));
+
+        const email = data.email;
+
+        if (email.toLowerCase() === "namkoo71@gmail.com") {
+          document.getElementById("login-area").style.display = "none";
+          document.getElementById("content").style.display = "block";
+        } else {
+          alert("Access denied. Email not authorized.\nYour email: " + email);
+          google.accounts.id.disableAutoSelect(); // optional: prevent auto popup
+        }
+      }
+
+      window.onload = function () {
+        google.accounts.id.initialize({
+          client_id:
+            "877701540997-riujivftahvtaq269pk3v5ufipv913aj.apps.googleusercontent.com",
+          callback: handleCredentialResponse,
+        });
+
+        google.accounts.id.renderButton(
+          document.getElementById("g_id_signin"), // can also auto-render via HTML
+          { theme: "outline", size: "large" },
+        );
+
+        // Optional: show One Tap prompt (popup) automatically
+        // google.accounts.id.prompt();
+      };
+    </script>
+  </body>
+</html>
